@@ -1,0 +1,34 @@
+* {
+	box-sizing: border-box;
+}
+
+#wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 480px;
+	height: 270px;
+	
+	background: #000;
+	overflow: hidden;
+}
+#slideContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 500%;/* 100 x <numslides> */
+	transition: left ease-in-out .25s;
+}
+.slide {
+	position: absolute;
+	padding: 20px;
+	top: 0;
+	width: 20%;/* 100 / <numslides> */
+	height: 100%;
+}
+.paddedContent {
+	height: 100%;
+	
+	background: #ccc;
+}
