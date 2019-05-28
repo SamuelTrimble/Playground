@@ -1,0 +1,13 @@
+{
+	"name": "nodefs",
+	"description": "Full-stack Node experimentation",
+	"version": "0.1.0",
+	"main": "app.js",
+	"scripts": {},
+	"author": "Samuel Trimble",
+	"license": "MIT",
+	"private": true,
+	"dependencies": {
+		"express": "^4.17.1"
+	}
+}

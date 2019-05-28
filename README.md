@@ -5,6 +5,9 @@ A simple repo for misc experiments with web tech.
 
 ## Projects
 
+### NodeFS
+Test project for a full-stack Node-based site.
+
 ### ElectronTests
 A playground for testing out various Electron functionality.
 
