@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function(expressApp) {
+	const users = require('./API/users')();
+
 	let api = {};
 
 	api.app = expressApp;
@@ -8,54 +10,51 @@ module.exports = function(expressApp) {
 	api.initRoutes = function() {
 		console.log('API:initRoutes');
 		
-		api.app.get('/api/v1/users/:id?', function (req, res) {
-			if (req.params.id === undefined) {
-				//No specific 'id' specified, return all users
-				res.json([
-					{
-						id: 0,
-						name: "Test 1"
-					},
-					{
-						id: 1,
-						name: "Test 2"
-					},
-					{
-						id: 2,
-						name: "Test 3"
-					}
-				]);
+		api.app.get('/api/v1/users/:id', async function(req, res) {
+			let id = parseInt(req.params.id, 10);
+
+			//reject improperly formatted 'id' values
+			if (isNaN(id)) {
+				res.status(500).send({
+					errorMessage: "Invalid format for 'id'!"
+				});
 				return;
 			}
-			
-			let id = parseInt(req.params.id, 10);
-			switch (id) {
-				case 0:
-					res.send({
-						id: 0,
-						name: "Test 1"
-					});
-					break;
-				case 1:
-					res.send({
-						id: 1,
-						name: "Test 2"
-					});
-					break;
-				case 2:
-					res.send({
-						id: 2,
-						name: "Test 3"
-					});
-					break;
-				default:
-					res.status(404).send({
-						errorMessage: `User ${id} does not exist!`
-					})
-					break;
+
+			let result = await users.get(id);
+
+			//null result was an error
+			if (result === null) {
+				res.status(500).send({
+					errorMessage: "There was an error getting users!"
+				});
+				return;
 			}
+
+			//empty result was not found
+			if ((!result.hasOwnProperty('id')) || (result.id === -1)) {
+				res.status(404).send({
+					errorMessage: `User ${id} could not be found!`
+				});
+				return;
+			}
+
+			res.send(result);
+		});
+		api.app.get('/api/v1/users/', async function(req, res) {
+			let result = await users.getAll();
+
+			//null result was an error
+			if (result === null) {
+				res.status(500).send({
+					errorMessage: "There was an error getting users!"
+				});
+				return;
+			}
+
+			res.send(result);
 		});
 	};
 
 	return api;
-}
+};
