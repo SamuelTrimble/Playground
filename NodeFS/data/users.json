@@ -1,14 +1,17 @@
 [
 	{
 		"id": 0,
-		"name": "Test Person"
+		"name": "Test Person",
+		"profileImage": ""
 	},
 	{
 		"id": 1,
-		"name": "Another Person"
+		"name": "Another Person",
+		"profileImage": ""
 	},
 	{
 		"id": 2,
-		"name": "One More"
+		"name": "One More",
+		"profileImage": ""
 	}
 ]
