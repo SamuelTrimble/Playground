@@ -1,6 +1,6 @@
 <template>
 	<div id="app" :class="{ prod : isProd }">
-		<router-view/>
+		<router-view id="view" />
 	</div>
 </template>
 
@@ -34,6 +34,21 @@ export default {
 *:before,
 *:after {
 	box-sizing: border-box;
+}
+
+html,
+body {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+
+	color: $black;
+	@include font-regular();
+	font-size: 100%;
+
+	background: $white;
 }
 
 </style>
