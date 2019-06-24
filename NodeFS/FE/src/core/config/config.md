@@ -11,6 +11,7 @@ Configuration for interfacing with the NodeFS API.
 *Example configuration:*
 ```javascript
 export const API_CONFIG = {
-	baseUrl: ""		//Base URL to API. Should be set to local dev environment while testing and eventual real URL when hosted somewhere.
+	//Base URL to API. Should be set to local dev environment while testing and eventual real URL when hosted somewhere.
+	baseUrl: ""
 };
 ```

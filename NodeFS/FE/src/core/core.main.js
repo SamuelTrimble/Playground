@@ -1,3 +1,5 @@
+import { API_CONFIG } from './config/api.config'
+
 export default class Core {
 	constructor() {
 		//eslint-disable-next-line
@@ -122,6 +124,22 @@ export default class Core {
 			newEle.setAttribute('class', classes);
 		} catch (err) {
 			this.log(err);
+		}
+	}
+
+	//Queries the api for all users
+	async GetUserData() {
+		try {
+			let response = await fetch(`${API_CONFIG.baseUrl}/users`, {
+				method: 'GET'
+			});
+			let result = await response.json();
+
+			return result;
+		} catch (err) {
+			this.log(err);
+
+			return null;
 		}
 	}
 }

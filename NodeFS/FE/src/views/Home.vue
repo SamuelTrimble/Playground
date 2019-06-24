@@ -32,23 +32,7 @@ export default {
 	},
 	data() {
 		return {
-			userData: [
-				{
-					id: 0,
-					name: "Test Person",
-					profileImage: ""
-				},
-				{
-					id: 1,
-					name: "Another Person",
-					profileImage: ""
-				},
-				{
-					id: 2,
-					name: "One More",
-					profileImage: ""
-				}
-			],
+			userData: [],
 			activeUser: -1
 		}
 	},
@@ -57,8 +41,8 @@ export default {
 		this.$nextTick(this.init);
 	},
 	methods: {
-		init: function() {
-
+		init: async function() {
+			this.userData = await this.$core.GetUserData();
 		},
 		userSelected: function(idx) {
 			this.activeUser = idx;
