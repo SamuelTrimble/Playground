@@ -123,11 +123,11 @@ export default class Core {
 			classes += "embedded-svg";
 			newEle.setAttribute('class', classes);
 		} catch (err) {
-			this.log(err);
+			this.Log(err);
 		}
 	}
 
-	//Queries the api for all users
+	//Calls api to retrieve list of all users
 	async GetUserData() {
 		try {
 			let response = await fetch(`${API_CONFIG.baseUrl}/users`, {
@@ -137,9 +137,46 @@ export default class Core {
 
 			return result;
 		} catch (err) {
-			this.log(err);
+			this.Log(err);
 
 			return null;
+		}
+	}
+
+	//Calls api to save changes to a user record
+	async SaveUser(data) {
+		try {
+			let response = await fetch(`${API_CONFIG.baseUrl}/users/${data.id}`, {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			});
+			let result = await response.json();
+
+			return result.isSuccess;
+		} catch (err) {
+			this.Log(err);
+
+			return false;
+		}
+	}
+
+	//Calls api to delete a user record
+	async DeleteUser(id) {
+		try {
+			let response = await fetch(`${API_CONFIG.baseUrl}/users/${id}`, {
+				method: 'DELETE'
+			});
+			let result = await response.json();
+
+			return result.isSuccess;
+		} catch (err) {
+			this.Log(err);
+
+			return false;
 		}
 	}
 }

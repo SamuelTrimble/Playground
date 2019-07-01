@@ -13,14 +13,13 @@ export default {
 			default: () => { return []; }
 		}
 	},
-	data() {
-		return {
-			curItemIdx: -1
+	computed: {
+		curItemIdx() {
+			return (this.$store.state.activeUser);
 		}
 	},
 	methods: {
 		selectItem: function(newIdx) {
-			this.curItemIdx = newIdx;
 			this.$emit('user_selected', newIdx);
 		}
 	}
