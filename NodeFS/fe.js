@@ -10,9 +10,10 @@ module.exports = function(app) {
 	
 	fe.initRoutes = function() {
 		console.log('FE:initRoutes');
-		
-		fe.app.use(express.static(path.join(__dirname, "FE/dist")));
 
+		fe.app.use('/profileimages', express.static(path.join(__dirname, "data/uploads")));
+
+		fe.app.use(express.static(path.join(__dirname, "FE/dist")));
 		fe.app.get('*', (req, res) => {
 			res.sendFile(__dirname, "FE/dist/index.html");
 		});

@@ -2,8 +2,9 @@
 	<div id="userEdit">
 		<div id="userData" v-if="user !== null" v-bind:data-id="user.id">
 			<input id="userName" v-bind:value="user.name">
-			<div id="userImage" v-bind:style="{ backgroundImage: user.profileImage }">
+			<div id="userImage" v-bind:style="{ backgroundImage: 'url(' + user.profileImage + ')' }">
 				<div id="dropTarget" v-if="user.profileImage == ''">drag &amp; drop image here</div>
+				<input id="fileField" type="file">
 			</div>
 			<button id="deleteUser" @click="DeleteUser">Delete User</button>
 			<button id="saveUser" @click="SaveUser">Save User</button>
@@ -71,6 +72,7 @@ export default {
 }
 #userImage {
 	display: flex;
+	position: relative;
 	width: 200px;
 	height: 200px;
 	flex-direction: column;
@@ -83,8 +85,17 @@ export default {
 	border: 2px dashed $black;
 	border-radius: 50%;
 
-	> #dropTarget {
-		
+	> #fileField {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+
+		cursor: pointer;
+
+		border-radius: 50%;
 	}
 }
 </style>
