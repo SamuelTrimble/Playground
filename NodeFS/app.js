@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
 	next();
 });
 app.use(express.json());
-app.use(express.urlencoded({extended: true, limit: "5mb"}));
+app.use(express.urlencoded({ extended: true }));
 
 app.listen(port, () => {
 	console.log(`server running on port: ${port}`);

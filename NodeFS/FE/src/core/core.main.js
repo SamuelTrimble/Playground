@@ -143,6 +143,23 @@ export default class Core {
 		}
 	}
 
+	//Calls api to upload selected user profile image and returns the new url
+	async UploadUserImage(formData) {
+		try {
+			let response = await fetch(`${API_CONFIG.baseUrl}/userimage`, {
+				method: 'POST',
+				body: formData
+			});
+			let result = await response.json();
+
+			return result;
+		} catch (err) {
+			this.Log(err);
+
+			return false;
+		}
+	}
+
 	//Calls api to save changes to a user record
 	async SaveUser(data) {
 		try {
